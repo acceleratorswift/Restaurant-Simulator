@@ -10,7 +10,7 @@
 #if amount earned exceeds 40, +1 win
 #if they get three wins:
 #get to choose the gift they want-- if and else
-#Bonus: individual food gets own prices?
+#Individual food gets own prices?
 
 import random
 import time
@@ -28,68 +28,80 @@ class Player:
 chef = Player(name, 0, 0)
 
 menu = {
-    "Popcorn Chicken": {
-        "Difficulty": 4.9,
-        "Chicken": 1.0,
-        "Spicy": 0.5,
-        "Starch": 3.0,
+    "Popcorn Chicken🍿🍗": {
+        "Difficulty😱": 4.9,
+        "Chicken🍗": 1.0,
+        "Spicy🌶️": 0.5,
+        "Starch🍚": 3.0,
         "Price": 2.5        
     },
-    "Burger": {
-        "Difficulty": 5.0,
-        "Bun": 2.0,
-        "Tomatoes": 2.0,
-        "Patty": 1.0,
-        "Lettuce": 1.5,
+    "Burger🍔": {
+        "Difficulty💀": 5.0,
+        "Bun🥯": 2.0,
+        "Tomatoes🍅": 2.0,
+        "Patty🥩": 1.0,
+        "Lettuce🥬": 1.5,
         "Price": 3.0
     },
-    "Salad": {
-        "Difficulty": 3.4,
-        "Romaine Lettuce": 2.0,
-        "Spinach": 3.5,
-        "Cucumbers": 3.0,
-        "Tomatoes": 2.5,
-        "Radishes": 1.5,
-        "Corn": 4.0,
+    "Salad🥗": {
+        "Difficulty😫": 3.4,
+        "Romaine Lettuce🥬": 2.0,
+        "Carrot🥕": 3.5,
+        "Cucumbers🥒": 3.0,
+        "Tomatoes🍅": 2.5,
+        "Radishes🫜": 1.5,
+        "Corn🌽": 4.0,
         "Price": 2.5
     }
 }
 
 i = 0
 
-print(f"Hi {name}! Welcome to your shift!")
-while i < 5:
-    order = random.choice(list(menu))
-    difficultyLevel = menu[order]["Difficulty"] 
-    satisfactionLevel = random.randint(1, 10)
-    input("Press Enter to see order.")
-    print(f"Here is the order: {order}. The difficulty level is {difficultyLevel}/5")
-    input("Press Enter to see ingredients required.")
-    print("Here are the ingredients needed: ")
-    for ingredient, amount in menu[order].items():
-        if ingredient != "Difficulty":
-            print(f"{ingredient}: {amount}")
+while True: 
+    i = 0
+    print(f"Hi {name}! Welcome to your shift!")
+    while i < 5:
+        order = random.choice(list(menu))
+        difficultyLevel = menu[order]["Difficulty"] 
+        satisfactionLevel = random.randint(1, 10)
+        input("Press Enter to see order.")
+        print(f"Here is the order: {order}. The difficulty level is {difficultyLevel}/5")
+        input("Press Enter to see ingredients required.")
+        print("Here are the ingredients needed: ")
+        for ingredient, amount in menu[order].items():
+            if ingredient != "Difficulty":
+                print(f"{ingredient}: {amount}")
 
-    print("Have fun making the food!")
-    input("Press Enter when you are ready to serve the food")
-    print("Serving...")
+        print("Have fun making the food!")
+        input("Press Enter when you are ready to serve the food")
+        print("Serving...")
+        time.sleep(2)
+        print("The customer is eating...")
+        time.sleep(2)
+        print("The customer is evaluating...")
+        time.sleep(2)
+        input("Press Enter to see satisfaction level.")
+        print(f"The satisfaction level is {satisfactionLevel}/10.")
+        if satisfactionLevel >= 7:
+            chef.money += menu[order]["Price"]
+            print(f"Well done! You have earned ${menu[order]["Price"]}0! Your balance is ${chef.money}0.")
+        else:
+            print(f"Try next time! Your balance is ${chef.money}0.")
+        i += 1
+    print("Calculating total balance...")
     time.sleep(2)
-    print("The customer is eating...")
-    time.sleep(2)
-    print("The customer is evaluating...")
-    time.sleep(2)
-    input("Press Enter to see satisfaction level.")
-    print(f"The satisfaction level is {satisfactionLevel}/10.")
-    if satisfactionLevel >= 7:
-        chef.money += menu[order]["Price"]
-        print(f"Well done! You have earned ${menu[order]["Price"]}0! Your balance is ${chef.money}0.")
+    if chef.money >= 12:
+        chef.wins += 1
+        print(f"Good Job! You have earned ${chef.money}0! You have added one win! Your total wins now: {chef.wins}.")
     else:
-        print(f"Try next time! Your balance is ${chef.money}0.")
-    i += 1
-print("Calculating total balance...")
-time.sleep(2)
-if chef.money >= 12:
-    chef.wins += 1
-    print(f"Good Job! You have earned ${chef.money}0! You have added one win! Your total wins now: {chef.wins}.")
-else:
-    print(f"Oh no, you only earned ${chef.money}0... You did not add any wins. Your total wins now: {chef.wins}.")
+        print(f"Oh no, you only earned ${chef.money}0... You did not add any wins. Your total wins now: {chef.wins}.")
+
+    exit = input("Would you like to exit the game? y/n (Case sensitive):")
+    if exit == "y":
+        print(f"Calculating total wins...")
+        time.sleep(1)
+        input(f"You have earned {chef.wins}! Good job! Click enter to choose your gift:")
+    elif exit == "n":
+        print(f"You have earned {chef.wins}! Keep playing to earn a gift.")
+    else:
+        print("That is not an answer.")
