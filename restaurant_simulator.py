@@ -32,16 +32,16 @@ menu = {
         "Difficulty": 4.9,
         "Chicken": 1.0,
         "Spicy": 0.5,
-        "Starch": 3.0#,
-#       "Price": 2.5        
+        "Starch": 3.0,
+        "Price": 2.5        
     },
     "Burger": {
         "Difficulty": 5.0,
         "Bun": 2.0,
         "Tomatoes": 2.0,
         "Patty": 1.0,
-        "Lettuce": 1.5
-#       "Price": 3.0
+        "Lettuce": 1.5,
+        "Price": 3.0
     },
     "Salad": {
         "Difficulty": 3.4,
@@ -51,7 +51,7 @@ menu = {
         "Tomatoes": 2.5,
         "Radishes": 1.5,
         "Corn": 4.0,
-#       "Price": 2.5
+        "Price": 2.5
     }
 }
 
@@ -81,15 +81,15 @@ while i < 5:
     input("Press Enter to see satisfaction level.")
     print(f"The satisfaction level is {satisfactionLevel}/10.")
     if satisfactionLevel >= 7:
-        chef.money += 10
-        print(f"Well done! You have earned $10! Your balance is ${chef.money}.")
+        chef.money += menu[order]["Price"]
+        print(f"Well done! You have earned ${menu[order]["Price"]}0! Your balance is ${chef.money}0.")
     else:
-        print(f"Try next time! Your balance is ${chef.money}.")
+        print(f"Try next time! Your balance is ${chef.money}0.")
     i += 1
 print("Calculating total balance...")
 time.sleep(2)
-if chef.money >= 40:
-    chef.money += 1
-    print(f"Good Job! You have earned ${chef.money}! You have added one win! Your total wins now: {chef.wins}.")
+if chef.money >= 12:
+    chef.wins += 1
+    print(f"Good Job! You have earned ${chef.money}0! You have added one win! Your total wins now: {chef.wins}.")
 else:
-    print(f"Oh no, you only earned ${chef.money}... You did not add any wins. Your total wins now: {chef.wins}.")
+    print(f"Oh no, you only earned ${chef.money}0... You did not add any wins. Your total wins now: {chef.wins}.")
